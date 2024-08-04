@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animesh</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, h3, h4, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #3c1053, #a4407f);
+            color: #e1bee7;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1.centralized {
+            text-align: center;
+            margin: 0;
+            color: #ffeb3b;
+            font-size: 2em;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+        }
+
+        a {
+            color: #ffeb3b;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #76ff03;
+            text-shadow: 0 0 5px #76ff03;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 4cm auto 20px; /* Adjusted margin-top for About section */
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            position: relative;
+            animation: emerge 1s ease-out;
+        }
+
+        @keyframes emerge {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #ffeb3b;
+        }
+
+        .highlighted-heading {
+            font-size: 1.8em;
+            color: #ffeb3b;
+            border-bottom: 2px solid #ffeb3b;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .tech-projects, .space-projects {
+            color: #ffeb3b; /* Yellow color for headings */
+        }
+
+        .project {
+            margin-bottom: 15px; /* Reduced margin for closer spacing */
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: emerge 1s ease-out;
+        }
+
+        .project:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .project h3 {
+            color: #ffeb3b;
+            transition: color 0.3s ease;
+        }
+
+        .project h3:hover {
+            color: #76ff03;
+        }
+
+        .project-details {
+            display: none;
+            padding-top: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .project-details.active {
+            display: block;
+            max-height: 1000px; /* Adjust as needed */
+            opacity: 1;
+        }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 20px;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            color: #ffeb3b;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .arrow:hover {
+            color: #76ff03;
+            transform: rotate(180deg);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1000;
+            animation: emerge 1s ease-out;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            .arrow {
+                font-size: 16px;
+            }
+
+            h1.centralized {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <h1 class="centralized">Animesh</h1>
+            <ul>
+                <li><a href="#about" onclick="smoothScroll(event, 'about')">About Me</a></li>
+                <li><a href="#projects" onclick="smoothScroll(event, 'projects')">Projects</a></li>
+                <li><a href="#contact" onclick="smoothScroll(event, 'contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container" id="about">
+        <h2>About Me</h2>
+        <p>Hello! My name is Animesh,currently residing in <strong>Pune</strong>. I am currently in grade 12 and scored an impressive <strong>93%</strong> in 10th grade from CBSE.</p>
+        <p>I am deeply passionate about <strong>engineering</strong> and am preparing for a career in this field. My interests lie particularly in <strong>space</strong> and <strong>technology</strong>, which drive my curiosity and enthusiasm for learning and innovation.</p>
+        <p>In addition to my academic pursuits, I have engaged in various projects using <strong>Raspberry Pi</strong>, where I've explored its applications in different domains. These projects have not only enhanced my technical skills but also fueled my desire to contribute to technological advancements in the future.</p>
+        <p>I am proficient in several programming languages including <strong>Python</strong>, <strong>C</strong>, <strong>C++</strong>, and more. These skills have been instrumental in my projects and learning journey.</p>
+        <p>Outside of technology, I am passionate about <strong>cycling</strong>. I regularly cycle between <strong>50 to 100 km</strong>, which helps me stay active and clear-headed.</p>
+    </div>
+    <div class="container" id="projects">
+        <h2 class="highlighted-heading">Projects</h2>
+        
+        <h3 class="tech-projects">Tech Projects</h3>
+        <div class="project">
+            <h4>Automated Plant Watering System</h4>
+            <p>An automated system for watering plants based on soil moisture levels, using sensors and Raspberry Pi to ensure optimal plant care.</p>
+            <div class="arrow" onclick="toggleProjectDetails('plant-watering')">▼</div>
+            <div class="project-details" id="plant-watering">
+                <h5>Description:</h5>
+                <p>The <strong>Automated Plant Watering System</strong> is an innovative project designed to ensure that plants receive the right amount of water at the right time. Using a combination of <strong>soil moisture sensors</strong> and a <strong>Raspberry Pi</strong>, this system monitors the moisture level of the soil and activates a water pump when needed.</p>
+                <p>The system is equipped with a soil moisture sensor that continuously measures the soil's moisture content. The data collected by the sensor is sent to the Raspberry Pi, which then decides when to activate the water pump based on pre-set thresholds. This ensures that the plants are watered efficiently, conserving water and reducing the need for manual intervention.</p>
+                <p>Additional features include a web interface for monitoring and adjusting the system settings remotely, making it a highly versatile solution for plant care.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Star Trail Photography</h4>
+            <p>A project involving capturing long-exposure photographs of star trails using a Raspberry Pi camera.</p>
+            <div class="arrow" onclick="toggleProjectDetails('star-trail')">▼</div>
+            <div class="project-details" id="star-trail">
+                <h5>Description:</h5>
+                <p>The <strong>Star Trail Photography</strong> project aims to capture the beautiful and mesmerizing trails of stars over long periods. Using a <strong>Raspberry Pi camera</strong>, this project involves taking a series of long-exposure photos at regular intervals throughout the night.</p>
+                <p>The captured images are then combined using software to create a single photograph that shows the trails of stars as they move across the night sky. This project requires careful planning of the camera setup, exposure times, and post-processing techniques to achieve the desired effect.</p>
+                <p>It offers a great opportunity to explore astrophotography and learn about the effects of long exposures and star movements.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Smart Home Automation</h4>
+            <p>A project to control various home appliances remotely using a Raspberry Pi and IoT technology.</p>
+            <div class="arrow" onclick="toggleProjectDetails('home-automation')">▼</div>
+            <div class="project-details" id="home-automation">
+                <h5>Description:</h5>
+                <p>The <strong>Smart Home Automation</strong> project focuses on creating a system to control various home appliances remotely. Utilizing a <strong>Raspberry Pi</strong> and Internet of Things (IoT) technology, this project enables users to manage devices such as lights, fans, and security systems through a web interface or mobile app.</p>
+                <p>Key features include real-time monitoring, scheduling of appliance operations, and integration with voice assistants for hands-free control. This project demonstrates the potential of smart home technologies to enhance convenience and energy efficiency in everyday life.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>IoT Weather Station</h4>
+            <p>A weather station project that collects and reports weather data using IoT sensors connected to a Raspberry Pi.</p>
+            <div class="arrow" onclick="toggleProjectDetails('weather-station')">▼</div>
+            <div class="project-details" id="weather-station">
+                <h5>Description:</h5>
+                <p>The <strong>IoT Weather Station</strong> project involves building a weather station that gathers data on temperature, humidity, and atmospheric pressure using IoT sensors. The collected data is processed and reported by a <strong>Raspberry Pi</strong> to provide real-time weather information.</p>
+                <p>The system features a web interface for viewing historical data trends and current weather conditions. It serves as a valuable tool for understanding weather patterns and can be used for various applications, including local weather forecasting and environmental monitoring.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Smart Mirror</h4>
+            <p>A project to create a smart mirror that displays useful information such as time, weather, and calendar events using a Raspberry Pi.</p>
+            <div class="arrow" onclick="toggleProjectDetails('smart-mirror')">▼</div>
+            <div class="project-details" id="smart-mirror">
+                <h5>Description:</h5>
+                <p>The <strong>Smart Mirror</strong> project aims to develop an interactive mirror that shows useful information such as time, weather, and calendar events. Built with a <strong>Raspberry Pi</strong>, this smart mirror integrates with online services to provide real-time updates and notifications.</p>
+                <p>Key features include a customizable display, integration with various APIs for fetching information, and voice commands for hands-free interaction. This project showcases the potential of combining hardware and software to create functional and engaging devices.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Voice Assistant Integration</h4>
+            <p>A project to integrate a voice assistant with various home automation systems for hands-free control.</p>
+            <div class="arrow" onclick="toggleProjectDetails('voice-assistant')">▼</div>
+            <div class="project-details" id="voice-assistant">
+                <h5>Description:</h5>
+                <p>The <strong>Voice Assistant Integration</strong> project focuses on connecting a voice assistant with different home automation systems. By utilizing a <strong>Raspberry Pi</strong> and popular voice assistant platforms, this project enables users to control various smart home devices through voice commands.</p>
+                <p>Features include setting up routines, controlling lights, adjusting thermostats, and more. This project demonstrates the seamless interaction between voice technology and smart home systems, enhancing user convenience and accessibility.</p>
+            </div>
+        </div>
+
+        <h3 class="space-projects">Space Projects</h3>
+        <div class="project">
+            <h4>Space Mission Simulation</h4>
+            <p>A simulation project designed to model various aspects of a space mission, including trajectory calculations and mission planning.</p>
+            <div class="arrow" onclick="toggleProjectDetails('space-mission')">▼</div>
+            <div class="project-details" id="space-mission">
+                <h5>Description:</h5>
+                <p>The <strong>Space Mission Simulation</strong> project involves creating a simulation model to analyze and plan different aspects of a space mission. This includes trajectory calculations, spacecraft dynamics, and mission planning strategies.</p>
+                <p>Using software tools and algorithms, the simulation helps in understanding the challenges and requirements of space missions, providing insights into optimizing mission parameters and ensuring successful outcomes.</p>
+                <p>This project is ideal for gaining hands-on experience with space mission planning and learning about the complexities involved in space exploration.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Satellite Tracking System</h4>
+            <p>A system for tracking the position and movement of satellites using real-time data.</p>
+            <div class="arrow" onclick="toggleProjectDetails('satellite-tracking')">▼</div>
+            <div class="project-details" id="satellite-tracking">
+                <h5>Description:</h5>
+                <p>The <strong>Satellite Tracking System</strong> is designed to monitor and track satellites as they orbit the Earth. Using real-time data from satellite tracking sources, this system calculates and displays the current position and trajectory of satellites.</p>
+                <p>Features of the system include interactive maps, satellite position predictions, and data visualization tools to enhance the tracking experience. This project provides valuable insights into satellite operations and space environment monitoring.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Exoplanet Detection</h4>
+            <p>A project focused on developing algorithms to detect exoplanets using light curve data from telescopes.</p>
+            <div class="arrow" onclick="toggleProjectDetails('exoplanet-detection')">▼</div>
+            <div class="project-details" id="exoplanet-detection">
+                <h5>Description:</h5>
+                <p>The <strong>Exoplanet Detection</strong> project aims to develop and implement algorithms for detecting exoplanets in light curve data collected from telescopes. By analyzing variations in starlight, the project identifies potential exoplanets and characterizes their properties.</p>
+                <p>This project provides insights into the methods used in exoplanet research and contributes to the understanding of planetary systems beyond our solar system.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Astronomical Data Analysis</h4>
+            <p>An analysis project that processes and interprets large datasets from astronomical observations.</p>
+            <div class="arrow" onclick="toggleProjectDetails('astro-data-analysis')">▼</div>
+            <div class="project-details" id="astro-data-analysis">
+                <h5>Description:</h5>
+                <p>The <strong>Astronomical Data Analysis</strong> project involves processing and interpreting extensive datasets obtained from astronomical observations. Using various data analysis techniques, this project aims to uncover new insights and patterns in the data, contributing to the field of astronomy.</p>
+                <p>Tools and methods used in this project include statistical analysis, data visualization, and machine learning algorithms to handle and make sense of large volumes of astronomical data.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Planetary Atmosphere Simulation</h4>
+            <p>A simulation project to model the atmospheres of different planets and analyze their climatic conditions.</p>
+            <div class="arrow" onclick="toggleProjectDetails('planetary-atmosphere')">▼</div>
+            <div class="project-details" id="planetary-atmosphere">
+                <h5>Description:</h5>
+                <p>The <strong>Planetary Atmosphere Simulation</strong> project involves creating simulations of the atmospheres of various planets to study their climatic conditions. Using computational models and atmospheric data, this project analyzes factors such as temperature, pressure, and composition.</p>
+                <p>This simulation helps in understanding how different atmospheric conditions affect planetary climates and supports research in planetary science.</p>
+            </div>
+        </div>
+        <div class="project">
+            <h4>Cosmic Microwave Background Analysis</h4>
+            <p>A project that analyzes data from the Cosmic Microwave Background to study the early universe.</p>
+            <div class="arrow" onclick="toggleProjectDetails('cmb-analysis')">▼</div>
+            <div class="project-details" id="cmb-analysis">
+                <h5>Description:</h5>
+                <p>The <strong>Cosmic Microwave Background (CMB) Analysis</strong> project focuses on analyzing data from the Cosmic Microwave Background to study the early universe's conditions. This project involves processing and interpreting data to understand the origins and evolution of the universe.</p>
+                <p>Techniques used include statistical analysis, data fitting, and cosmological model testing to derive meaningful conclusions about the universe's history and structure.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="contact">
+        <h2 class="highlighted-heading">Contact</h2>
+        <p>If you would like to get in touch with me, you can reach out via the following contact details:</p>
+        <p>Email: <a href="mailto:iamanimesh.0711@gmail.com">iamanimesh.0711@gmail.com</a></p>
+        <p>Feel free to contact me for any queries, collaborations, or just to say hello!</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Animesh. All rights reserved.</p>
+    </footer>
+    <script>
+        function toggleProjectDetails(id) {
+            const details = document.getElementById(id);
+            details.classList.toggle('active');
+        }
+
+        // Header hide on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Smooth scroll function
+        function smoothScroll(event, sectionId) {
+            event.preventDefault();
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
